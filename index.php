@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+<?php
+require_once './php/autenticacao.php';
+$resultado = verificar_autenticacao("index.php");
+
+if ($resultado) {
+    header("Location: ./php/views/home.php");
+} else {
+    header("Location: ./php/views/login.php");
+}
+?>

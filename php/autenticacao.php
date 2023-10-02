@@ -1,12 +1,12 @@
 <?php
-session_start();
 
-function verificar_autenticacao()
+
+function verificar_autenticacao($path)
 {
-    if ($_SESSION['autenticado']) {
-        return true;
-    } else {
+    if (!$_SESSION['autenticado']) {
         return false;
+    } else {
+        return true;
     }
 }
 
