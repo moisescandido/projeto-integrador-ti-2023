@@ -12,7 +12,7 @@
     <?php
     ?>
     <section id="formulario">
-        <form>
+        <form method="post">
             <header>
                 <h1>Cadastro</h1>
                 <p>Produtos com melhores preços</p>
@@ -22,25 +22,25 @@
                     <div>
                         <label for="nome">Nome</label>
                     </div>
-                    <input type="text" name="nome" id="nome">
+                    <input type="text" name="nome" id="nome" min="4" max="50">
                 </div>
                 <div>
                     <div>
                         <label for="email">Email</label>
                     </div>
-                    <input type="text" name="email" id="email">
+                    <input type="email" name="email" id="email" min="4" max="50">
                 </div>
                 <div>
                     <div>
                         <label for="senha">Senha</label>
                     </div>
-                    <input type="text" name="senha" id="senha">
+                    <input type="password" name="senha" id="senha" min="4" max="50">
                 </div>
                 <div>
                     <div>
                         <label for="telefone">Telefone</label>
                     </div>
-                    <input type="text" name="telefone" id="telefone">
+                    <input type="text" name="telefone" id="telefone" min="14" max="14">
                 </div>
                 <div>
                     <div>
@@ -64,16 +64,16 @@
                     <div>
                         <label for="bairro">Bairro</label>
                     </div>
-                    <input type="text" name="bairro" id="bairro">
+                    <input type="text" name="bairro" id="bairro" >
                 </div>
                 <div>
                     <div>
                         <label for="cidade">Cidade</label>
                     </div>
-                    <input type="text" name="cidade" id="cidade">
+                    <input type="text" name="cidade" id="cidade" >
                 </div>
                 <div>
-                    <button>Log in</button>
+                    <button type="submit" id="cadastrar" name="cadastrar">Cadastrar</button>
                 </div>
             </main>
             <footer>
@@ -84,7 +84,7 @@
             </footer>
         </form>
     </section>
-    <script src="../../js/validacao.js"></script>
+    <script src="../../js/cadastro.js"></script>
 </body>
 
 </html>
@@ -104,17 +104,22 @@ if (isset($_POST['cadastrar'])) {
     $bairro = $_POST["bairro"];
     $cidade = $_POST["cidade"];
 
-    $banco->criar(
-        $nome,
-        $email,
-        $senha,
-        $telefone,
-        $cep,
-        $rua,
-        $numero,
-        $bairro,
-        $cidade
-    );
+    try {
+        $banco->criar(
+            $nome,
+            $email,
+            $senha,
+            $telefone,
+            $cep,
+            $rua,
+            $numero,
+            $bairro,
+            $cidade
+        );
+        header("Location: login.php");
+    } catch (Exception $e) {
+        echo "Erro: " . $e->getMessage();
+    }
 }
 
 ?>

@@ -11,8 +11,9 @@ create table usuarios(
     atualizado varchar(20)
 );
 
-create table endereco_usuario(
+create table endereco_usuarios(
     id int not null primary key auto_increment,
+    id_usuario int not null,
     rua varchar(50) not null,
     numero varchar(50) not null,
     bairro varchar(50) not null,
