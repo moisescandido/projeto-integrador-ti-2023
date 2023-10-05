@@ -9,23 +9,38 @@
 </head>
 
 <body>
-    <form method="get">
-        <h1>Login</h1>
-        <input type="text" name="email" id="email" placeholder="Digite seu e-mail">
-        <input type="text" name="senha" id="senha" placeholder="Digite sua senha">
-        <button type="submit">Entrar</button>
-        <div>
-            <p>Não tem um conta?</p>
-            <a href="./cadastro.php">Cadastre-se</a>
-        </div>
-    </form>
-    <div>
-        <ul>
-        </ul>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-        crossorigin="anonymous"></script>
+    <section id="formulario" style="margin-top:4rem;">
+        <form>
+            <header>
+                <h1>Log in</h1>
+                <p>Compre com os melhores preços</p>
+            </header>
+            <main>
+                <div>
+                    <div>
+                        <label for="email">Email</label>
+                    </div>
+                    <input type="text" name="email" id="email">
+                </div>
+                <div>
+                    <div>
+                        <label for="senha">Senha</label>
+                        <a href="#">Esqueci a senha</a>
+                    </div>
+                    <input type="text" name="senha" id="senha">
+                </div>
+                <div>
+                    <button>Log in</button>
+                </div>
+            </main>
+            <footer>
+                <div>
+                    <p>Não tem um conta?</p>
+                    <a href="./cadastro.php">Cadastre-se</a>
+                </div>
+            </footer>
+        </form>
+    </section>
 </body>
 
 </html>
