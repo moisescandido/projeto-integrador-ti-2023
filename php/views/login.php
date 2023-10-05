@@ -30,7 +30,7 @@
                     <input type="text" name="senha" id="senha">
                 </div>
                 <div>
-                    <button>Log in</button>
+                    <button name="Log In">Log In</button>
                 </div>
             </main>
             <footer>
@@ -41,6 +41,16 @@
             </footer>
         </form>
     </section>
-</body>
+    <?php
+        if (isset($_POST['Log In'])){
+        $email = $_POST('email');
+        $senha = $_POST('senha');
+        include ('../db/usuario.php');
+        $banco = new Usuario;
+        $resultado = $banco ->entrar($email, $senha)
 
+        $resultado == null
+        }
+    ?>
+</body>
 </html>

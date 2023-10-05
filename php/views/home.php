@@ -8,7 +8,22 @@
 </head>
 
 <body>
-
+    <header>
+        <ul>
+            <li>sAPATO</li>
+            <li>sAPATO</li>
+            <li>sAPATO</li>
+            <li>sAPATO</li>
+            <li>sAPATO</li>
+            <li>sAPATO</li>
+        </ul>
+    </header>
+    <footer>
+        <header></header>
+        <main>
+            <p>Todos os Direitos Reservados</p>
+        </main>
+    </footer>
 </body>
 
 </html>

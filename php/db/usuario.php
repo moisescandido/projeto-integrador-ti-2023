@@ -37,7 +37,7 @@ class Usuario
 
         $usuarioId = $pdo->lastInsertId();
 
-        $queryEndereco = $pdo->prepare("INSERT INTO endereco_usuarios (rua, numero, bairro, cep, cidade, id_usuario) VALUES (:rua, :numero, :bairro, :cep, :cidade, :id_usuario)");
+        $queryEndereco = $pdo->prepare("INSERT INTO endereco_usuario (rua, numero, bairro, cep, cidade, id_usuario) VALUES (:rua, :numero, :bairro, :cep, :cidade, :id_usuario)");
         $queryEndereco->bindParam(":rua", $rua, PDO::PARAM_STR);
         $queryEndereco->bindParam(":numero", $numero, PDO::PARAM_STR);
         $queryEndereco->bindParam(":bairro", $bairro, PDO::PARAM_STR);
