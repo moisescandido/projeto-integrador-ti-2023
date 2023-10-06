@@ -10,7 +10,7 @@
 
 <body>
     <section id="formulario" style="margin-top:4rem;">
-        <form>
+        <form method="POST">
             <header>
                 <h1>Log in</h1>
                 <p>Compre com os melhores preços</p>
@@ -27,10 +27,10 @@
                         <label for="senha">Senha</label>
                         <a href="#">Esqueci a senha</a>
                     </div>
-                    <input type="text" name="senha" id="senha">
+                    <input type="password" name="senha" id="senha">
                 </div>
                 <div>
-                    <button name="Log In">Log In</button>
+                    <button name="login" type="submit">Log In</button>
                 </div>
             </main>
             <footer>
@@ -42,15 +42,31 @@
         </form>
     </section>
     <?php
-        if (isset($_POST['Log In'])){
-        $email = $_POST('email');
-        $senha = $_POST('senha');
-        include ('../db/usuario.php');
-        $banco = new Usuario;
-        $resultado = $banco ->entrar($email, $senha)
 
-        $resultado == null
+    session_start();
+    if (isset($_POST['login'])) {
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
+        include('../db/usuario.php');
+        $banco = new Usuario;
+
+        $resultado = $banco->entrar($email, $senha);
+
+
+        if (!empty($resultado)) {
+            $_SESSION['id_usuario'] = $resultado['id'];
+            $_SESSION['id_funcao'] = $resultado['id_funcao'];
+            $_SESSION['nome_usuario'] = $resultado['nome'];
+            $_SESSION['autenticado'] = true;
+
+            header("Location: ./home.php");
+            exit;
+        } else {
+            header("Location: ./cadastro.php");
+            exit;
         }
+    }
     ?>
 </body>
+
 </html>

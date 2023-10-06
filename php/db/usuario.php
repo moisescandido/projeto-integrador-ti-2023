@@ -50,10 +50,12 @@ class Usuario
     {
         $pdo = new PDO($this->conexao, $this->usuario_banco, $this->senha_banco);
 
-        $query = $pdo->prepare("SELECT nome, if_funcao WHERE email = :email AND senha =:senha");
-        $query->bindParam(":email", $email, PDO::PARAM_STR);
-        $query->bindParam(":senha", $senha, PDO::PARAM_STR);
+        $query = $pdo->prepare("SELECT id, nome, id_funcao FROM usuarios WHERE email = :email AND senha = :senha");
+        $query->bindParam("email", $email, PDO::PARAM_STR);
+        $query->bindParam("senha", $senha, PDO::PARAM_STR);
 
+
+        $query->execute();
         return $query->fetch(PDO::FETCH_ASSOC);
 
     }

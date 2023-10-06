@@ -1,0 +1,20 @@
+body {
+    color: #332F99;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#principal-menu {
+    display: flex;
+    grid-template-columns: 1fr 1fr;
+}
+
+aside {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    padding: 0.5rem 2rem;
+    height: 100%;
+}
+
+#fabricante div {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,38 @@
+body {
+    color: #332F99;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#header-cabecalho {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    padding: 1rem;
+}
+
+#header-cabecalho nav {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+}
+
+#header-cabecalho nav form button {
+    height: 2.2rem;
+    width: 5rem;
+    background-color: #332F99;
+    border: 1px solid #332F99;
+    color: white;
+    border-radius: 4px;
+}
+
+#header-cabecalho nav form input {
+    border: 1px solid #ccc;
+    font-size: large;
+    border-radius: 4px;
+    height: 2.1rem;
+}
+
+#header-cabecalho nav form button:hover {
+    cursor: pointer;
+}

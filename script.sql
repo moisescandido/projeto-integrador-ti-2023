@@ -24,12 +24,23 @@ create table endereco_usuarios(
 create table produtos(
     id int not null primary key auto_increment,
     id_fabricante int not null,
+    id_condicao int not null,
     id_imagem int not null,
     nome varchar(50) not null,
     descricao varchar(100) not null,
     valor decimal(10, 2) not null
 );
 
+create table condicoes_produtos (
+    id int not null primary key auto_increment,
+    condicao varchar(50) not null
+);
+
+create table vantagens_produtos(
+    id int not null primary key auto_increment,
+    id_produto int not null,
+    vantagem varchar(35)
+)
 create table estoque(
     id int not null primary key auto_increment,
     id_produto int not null,

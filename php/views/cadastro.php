@@ -9,8 +9,6 @@
 </head>
 
 <body>
-    <?php
-    ?>
     <section id="formulario">
         <form method="post">
             <header>
