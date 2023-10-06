@@ -15,6 +15,10 @@
     <header>
         <?php
         include("../componentes/header.php");
+        $nome_produto = "Sofá de couro";
+
+        include("../db/produtos.php");
+        $banco = new Produtos();
         ?>
     </header>
     <main>
@@ -85,25 +89,18 @@
                         <div class="mb-3">
                             <h5 class="text-start fs-6">Fabricante</h5>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label text-start text-dark-emphasis fs-6"
-                                    for="flexCheckDefault">
-                                    Fabrincate 1
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label text-start text-dark-emphasis fs-6"
-                                    for="flexCheckChecked">
-                                    Fabrincate 2
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                                <label class="form-check-label text-start text-dark-emphasis fs-6"
-                                    for="flexCheckChecked">
-                                    Fabrincate 3
-                                </label>
+                                <?php
+                                $fabricantes = $banco->fabrincantes_produto($nome_produto);
+
+                                foreach ($fabricantes as $itm) {
+                                    echo '<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">';
+
+                                    echo 'label class="form-check-label text-start text-dark-emphasis fs-6"
+                                        for="flexCheckDefault">
+                                        ' . $itm['nome'] . '
+                                    </label>';
+                                }
+                                ?>
                             </div>
                         </div>
                         <button style=" height: 2.2rem;
@@ -117,10 +114,6 @@
                 <div class="col-md-9">
                     <section class="d-flex flex-wrap g-3" style="gap: 1rem;">
                         <?php
-                        $nome_produto = "Sofá de couro";
-
-                        include("../db/produtos.php");
-                        $banco = new Produtos();
                         $resultado = $banco->pesquisa_nome($nome_produto);
 
                         foreach ($resultado as $item) {

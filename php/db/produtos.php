@@ -32,6 +32,16 @@ class Produtos
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+    function fabrincantes_produto(string $nome)
+    {
+        $pdo = new PDO($this->conexao, $this->usuario_banco, $this->senha_banco);
 
+        $query = $pdo->prepare("SELECT fa.id, fa.nome FROM fabricante fa INNER JOIN produtos pr ON pr.id_fabricante = fa.id and pr.nome LIKE CONCAT('%', :nome, '%') GROUP BY fa.nome;");
+        $query->bindParam(":nome", $nome, PDO::PARAM_STR);
+
+        $query->execute();
+
+        return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
 ?>
