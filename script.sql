@@ -23,12 +23,17 @@ create table endereco_usuarios(
 
 create table produtos(
     id int not null primary key auto_increment,
+    id_categoria int not null,
     id_fabricante int not null,
     id_condicao int not null,
     id_imagem int not null,
     nome varchar(50) not null,
     descricao varchar(100) not null,
     valor decimal(10, 2) not null
+);  
+create table categorias_produtos (
+    id int not null primary key auto_increment,
+    nome varchar(50) not null
 );
 
 create table condicoes_produtos (
@@ -36,15 +41,21 @@ create table condicoes_produtos (
     condicao varchar(50) not null
 );
 
-create table vantagens_produtos(
-    id int not null primary key auto_increment,
-    id_produto int not null,
-    vantagem varchar(35)
-)
 create table estoque(
     id int not null primary key auto_increment,
     id_produto int not null,
     quantidade int not null
+);
+
+create table vantagens_produtos(
+    id int not null primary key auto_increment,
+    id_produto int not null,
+    vantagem varchar(35)
+);
+
+create table imagens_produtos (
+    id int not null primary key auto_increment,
+    url varchar(1000) not null
 );
 
 create table fabricante(
@@ -63,7 +74,3 @@ create table carrinho(
     id_usuario int not null
 );
 
-create table imagens_produtos (
-    id int not null primary key auto_increment,
-    url varchar(1000) not null
-);
