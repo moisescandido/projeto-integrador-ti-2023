@@ -27,18 +27,20 @@ create table produtos(
     id_fabricante int not null,
     id_condicao int not null,
     id_imagem int not null,
+    id_oferta int not null,
+    id_entrega int not null,
     nome varchar(50) not null,
     descricao varchar(100) not null,
     valor decimal(10, 2) not null
 );  
 create table categorias_produtos (
     id int not null primary key auto_increment,
-    nome varchar(50) not null
+    nome varchar(50) not null unique
 );
 
 create table condicoes_produtos (
     id int not null primary key auto_increment,
-    condicao varchar(50) not null
+    condicao varchar(50) not null unique
 );
 
 create table estoque(
@@ -60,12 +62,12 @@ create table imagens_produtos (
 
 create table fabricante(
     id int not null primary key auto_increment,
-    nome varchar(50) not null
+    nome varchar(50) not null unique
 );
 
 create table funcoes_usuarios (
     id int not null primary key auto_increment,
-    funcao varchar(50) not null
+    funcao varchar(50) not null unique
 );
 
 create table carrinho(
@@ -74,3 +76,13 @@ create table carrinho(
     id_usuario int not null
 );
 
+create table tipo_entrega_produto(
+    id int not null primary key auto_increment,
+    nome varchar(50) not null unique
+);
+
+
+create table tipo_oferta_produto(
+    id int not null primary key auto_increment,
+    nome varchar(50) not null unique
+);

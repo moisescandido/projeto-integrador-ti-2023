@@ -1,10 +1,17 @@
 <?php
+
 class Usuario
 {
-    private $usuario_banco = "root";
-    private $senha_banco = "";
-    private $conexao = "mysql:host=localhost;dbname=projeto";
-
+    private $usuario_banco;
+    private $senha_banco;
+    private $conexao;
+    public function __construct()
+    {
+        include("credenciais.php");
+        $this->usuario_banco = $usuario_banco;
+        $this->senha_banco = $senha_banco;
+        $this->conexao = $conexao;
+    }
     public function criar(
         $nome,
         $email,
@@ -16,7 +23,6 @@ class Usuario
         $bairro,
         $cidade
     ) {
-
         $pdo = new PDO($this->conexao, $this->usuario_banco, $this->senha_banco);
 
         $id_funcao = 1;
