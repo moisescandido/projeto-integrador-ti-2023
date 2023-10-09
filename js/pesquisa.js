@@ -1,4 +1,4 @@
-const listaProdutos = document.getElementById("lista-produtos");
+var listaProdutos = document.getElementById("lista-produtos");
 var listaOriginalProdutos;
 
 function carregar(produto) {
@@ -12,7 +12,7 @@ function carregar(produto) {
         success: function (resposta) {
             if (resposta !== null && resposta !== undefined) {
                 resposta.oferta.forEach(x => {
-                    adicionarFabricante(x.nome, x.id);
+                    adicionarOfertas(x.nome, x.id);
                 });
                 resposta.entrega.forEach(x => {
                     adicionarEntrega(x.nome, x.id);
@@ -68,8 +68,7 @@ function criarCardProduto(imagem, preco, nome,) {
         </section>
     </div>
 </section>`
-
-    listaProdutos.innerHTML += card;
+    listaProdutos.innerHTML = card;
 }
 
 function adicionarOfertas(nome, id) {
@@ -79,7 +78,7 @@ function adicionarOfertas(nome, id) {
         <input class="form-check-input" type="checkbox" value="${id}" id="${nome}">
         <label class="form-check-label text-start text-dark-emphasis fs-6"
         for="${nome}">
-        ${oferta}
+        ${nome}
         </label>
     </div>`;
 

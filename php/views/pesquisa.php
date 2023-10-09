@@ -19,7 +19,6 @@
         $nome_produto;
         if (isset($_GET['produto'])) {
             $nome_produto = $_GET['produto'];
-            echo '<script src="../../js/pesquisa.js"></script';
         }
         ?>
     </header>
@@ -80,10 +79,13 @@
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="../../js/pesquisa.js"></script>
     <?php
+
     echo '<script>
     carregar("' . $nome_produto . '");
 </script>';
+
     ?>
 
 </body>
