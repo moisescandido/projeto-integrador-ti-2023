@@ -17,6 +17,7 @@
         <?php
         include("../componentes/header.php");
         $nome_produto;
+        
         if (isset($_GET['produto'])) {
             $nome_produto = $_GET['produto'];
         }
