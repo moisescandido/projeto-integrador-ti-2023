@@ -66,8 +66,10 @@ if (isset($_POST['atualizar'])) {
     $descricao = $_POST['descricao'];
     include("../../db/produtos.php");
 
+    $id = $_POST['atualizar'];
+
     $banco = new Produtos();
-    $resultado = $banco->pesquisa_nome($_POST['atualizar']);
+    $resultado = $banco->pesquisa_nome($id);
 
     foreach ($resultado as $item) {
         if (empty($url)) {
@@ -98,21 +100,46 @@ if (isset($_POST['atualizar'])) {
             $descricao = $item['descricao'];
         }
     }
-    try {
-        $banco->alterar_produto(
-            $url,
-            $categoria,
-            $valor,
-            $nome,
-            $oferta,
-            $entrega,
-            $condicao,
-            $fabricante,
-            $descricao
-        );
-    } catch (PDOException $e) {
-        echo "Erro ao atualizar o produto: " . $e->getMessage();
-    }
+
+    // $banco->alterar_produto(
+    //     $id,
+    //     $url,
+    //     $categoria,
+    //     $valor,
+    //     $nome,
+    //     $oferta,
+    //     $entrega,
+    //     $condicao,
+    //     $fabricante,
+    //     $descricao
+    // );
+    echo "<br>";
+    echo "<br>";
+    echo "<br>";
+    echo "<br>";
+    echo "<br>";
+    echo "<br>";
+    echo "<br>";
+    echo "<br>";
+    echo $id;
+    echo "<br>";
+    echo $url;
+    echo "<br>";
+    echo $categoria;
+    echo "<br>";
+    echo $valor;
+    echo "<br>";
+    echo $nome;
+    echo "<br>";
+    echo $oferta;
+    echo "<br>";
+    echo $entrega;
+    echo "<br>";
+    echo $condicao;
+    echo "<br>";
+    echo $fabricante;
+    echo "<br>";
+    echo $descricao;
 }
 ?>
 

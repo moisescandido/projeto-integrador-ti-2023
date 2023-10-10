@@ -124,7 +124,7 @@ class Produtos
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-    function alterar_produto(
+    function alterar_produto($id,
         $url,
         $categoria,
         $valor,

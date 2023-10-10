@@ -65,7 +65,6 @@ window.onload = () => {
 
 
 function adicionarInformacoesFormAsideModificar(id, url, categoria, fabricante, condicao, oferta, entrega, nome, descricao, valor) {
-
     botao.value = id;
     let imagemProduto = document.getElementById("imagem-produto")
     imagemProduto.src = url
@@ -91,27 +90,27 @@ function adicionarCardProduto(id, url, categoria, fabricante, condicao, oferta, 
 
 
 function adicionarCategorias(id, nome) {
-    filtroHTML = `<option name="${id}"value="${nome}">${nome}</option>`
+    filtroHTML = `<option name="categoria"value="${id}">${nome}</option>`
 
     selectCategoria.innerHTML += filtroHTML;
 }
 function adicionarFabricante(id, nome) {
-    filtroHTML = `<option name="${id}"value="${nome}">${nome}</option>`
+    filtroHTML = `<option name="fabricante"value="${id}">${nome}</option>`
 
     selectFabricante.innerHTML += filtroHTML;
 }
 function adicionarCondicao(id, nome) {
-    filtroHTML = `<option name="${id}"value="${nome}">${nome}</option>`
+    filtroHTML = `<option name="condicao"value="${id}">${nome}</option>`
 
     selectCondicao.innerHTML += filtroHTML;
 }
 function adicionarOferta(id, nome) {
-    filtroHTML = `<option name="${id}"value="${nome}">${nome}</option>`
+    filtroHTML = `<option name="oferta"value="${id}">${nome}</option>`
 
     selectOferta.innerHTML += filtroHTML;
 }
 function adicionarEntrega(id, nome) {
-    filtroHTML = `<option name="${id}"value="${nome}">${nome}</option>`
+    filtroHTML = `<option name="entrega"value="${id}">${nome}</option>`
 
     selectEntrega.innerHTML += filtroHTML;
 }
