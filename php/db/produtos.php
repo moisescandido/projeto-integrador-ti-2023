@@ -23,7 +23,7 @@ class Produtos
         INNER JOIN fabricante fa ON pr.id_fabricante = fa.id
         INNER JOIN tipo_entrega_produto tep ON pr.id_entrega = tep.id
         INNER JOIN tipo_oferta_produto top ON pr.id_entrega = top.id
-        INNER JOIN imagens_produtos imp ON pr.id_imagem = imp.id and pr.nome LIKE CONCAT('%', :nome, '%') OR pr.id = :id GROUP BY pr.id");
+        INNER JOIN imagens_produtos imp ON pr.id = imp.id_produto and pr.nome LIKE CONCAT('%', :nome, '%') OR pr.id = :id GROUP BY pr.id");
         $query->bindParam(":nome", $param, PDO::PARAM_STR);
         $query->bindParam(":id", $param, PDO::PARAM_INT);
 
@@ -110,7 +110,7 @@ class Produtos
     {
         $pdo = new PDO($this->conexao, $this->usuario_banco, $this->senha_banco);
 
-        $query = $pdo->prepare("SELECT pr.id, pr.descricao, cat.nome as categoria, imp.url, pr.valor, pr.nome, top.nome as oferta, tep.nome as entrega, con.condicao condicao, fa.nome as fabricante 
+        $query = $pdo->prepare("SELECT pr.id, pr.descricao, cat.id as categoria, imp.url, pr.valor, pr.nome, top.id as oferta, tep.id as entrega, con.id condicao, fa.id as fabricante 
         FROM produtos pr 
         INNER JOIN condicoes_produtos con 
         ON pr.id_condicao = con.id
@@ -118,13 +118,14 @@ class Produtos
         INNER JOIN tipo_entrega_produto tep ON pr.id_entrega = tep.id
         INNER JOIN tipo_oferta_produto top ON pr.id_entrega = top.id
         INNER JOIN categorias_produtos cat ON pr.id_categoria = cat.id
-        INNER JOIN imagens_produtos imp ON pr.id_imagem = imp.id GROUP BY pr.id");
+        INNER JOIN imagens_produtos imp ON pr.id = imp.id_produto GROUP BY pr.id");
 
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-    function alterar_produto($id,
+    function alterar_produto(
+        $id,
         $url,
         $categoria,
         $valor,
@@ -136,7 +137,6 @@ class Produtos
         $descricao
     ) {
         $pdo = new PDO($this->conexao, $this->usuario_banco, $this->senha_banco);
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = "UPDATE produtos SET 
                 id_categoria = :id_categoria,
@@ -162,10 +162,10 @@ class Produtos
 
         $stmt->execute();
 
-        $sql = "UPDATE produtos SET id_imagem = :id_imagem WHERE id = :id";
+        $sql = "UPDATE imagens_produtos SET url = :url WHERE id_produto = :id";
 
         $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':id_imagem', $id_imagem);
+        $stmt->bindParam(':url', $url);
         $stmt->bindParam(':id', $id);
 
         $stmt->execute();

@@ -26,7 +26,6 @@ create table produtos(
     id_categoria int not null,
     id_fabricante int not null,
     id_condicao int not null,
-    id_imagem int not null,
     id_oferta int not null,
     id_entrega int not null,
     nome varchar(50) not null,
@@ -57,6 +56,7 @@ create table vantagens_produtos(
 
 create table imagens_produtos (
     id int not null primary key auto_increment,
+    id_produto int not null,
     url varchar(1000) not null
 );
 

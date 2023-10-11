@@ -5,16 +5,46 @@ body {
     padding: 0;
 }
 
-aside {
-    position: fixed;
-    width: 15rem;
-    border: 1px solid red;
-    left: 0;
+header {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
 }
 
-aside img {
-    height: 100%;
-    width: 100%;
+header div {
+    display: flex;
+    gap: 1rem;
+}
+
+header nav button {
+    border: none;
+    height: 2.2rem;
+    background-color: #332F99;
+    border: 1px solid #332F99;
+    color: white;
+    border-radius: 4px;
+}
+
+header nav button:hover {
+    cursor: pointer;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: -20rem;
+    width: 15rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 0.5rem;
+    background-color: white;
+}
+
+aside form img {
+    max-width: 8rem;
+    min-width: 8rem;
 }
 
 aside form {
@@ -43,27 +73,41 @@ aside form button:hover {
     cursor: pointer;
 }
 
+.card-produto {
+    height: 20rem;
+    height: 15rem;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    padding: 1rem;
+}
+
+.card-produto:hover {
+    cursor: pointer;
+}
+
+.card-produto img {
+    max-height: 100%;
+    width: auto;
+}
+
 #lista-produtos {
-    margin-left: 20rem;
-    border: 1px solid red;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 1rem;
 }
 
-.produto-imagem {
-    cursor: pointer;
-    width: 15rem;
-    height: 10rem;
-    transition: 0.3s ease;
+#lista-produtos.move-right {
+    transform: translateX(20rem);
+    transition: transform 0.3s ease;
 }
 
-.produto-imagem:hover {
-    transform: scale(1.01);
-}
 
-.produto-imagem img {
-    border-radius: 15px;
-    max-width: 100%;
+#fechar {
+    width: 1.5rem;
     border: 1px solid red;
+    color: red;
+    background-color: white;
+}
+
+#fechar:hover {
+    cursor: pointer;
 }

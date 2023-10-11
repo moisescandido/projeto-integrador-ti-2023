@@ -9,7 +9,11 @@ const inputImagem = document.getElementById("imagem")
 const inputNome = document.getElementById("nome")
 const inputDescricao = document.getElementById("descricao")
 const inputValor = document.getElementById("valor")
-const botao = document.getElementById("botao");
+const botaoForm = document.getElementById("botao");
+const botaoAdicionarProduto = document.getElementById("adicionar-produto");
+const botaoFechar = document.getElementById("fechar");
+
+const aside = document.getElementById("informacao");
 window.onload = () => {
     $.ajax({
         url: "../../api/produtos.php",
@@ -23,6 +27,7 @@ window.onload = () => {
                 resposta.forEach(x => {
                     adicionarCardProduto(x.id, x.url, x.categoria, x.fabricante, x.condicao, x.oferta, x.entrega, x.nome, x.descricao, x.valor)
                 })
+
             }
         },
         error: function (erro) {
@@ -60,29 +65,52 @@ window.onload = () => {
             console.error("Erro: " + erro);
         }
     })
-    botao.value = null;
+    botaoForm.value = null;
 }
+inputImagem.oninput = () => {
+    let imagemProduto = document.getElementById("imagem-produto");
 
 
+    imagemProduto.src = inputImagem.value;
+    console.log(inputImagem.value)
+}
+botaoAdicionarProduto.onclick = () => {
+
+
+    aside.style.left = "0";
+    listaProdutos.style.marginLeft = "20%";
+    botaoForm.setAttribute('name', 'criar')
+    botaoForm.innerHTML = "Adicionar"
+    botaoForm.value = null;
+}
 function adicionarInformacoesFormAsideModificar(id, url, categoria, fabricante, condicao, oferta, entrega, nome, descricao, valor) {
-    botao.value = id;
-    let imagemProduto = document.getElementById("imagem-produto")
-    imagemProduto.src = url
+    aside.style.left = "0";
+    listaProdutos.style.marginLeft = "20%";
+    botaoForm.value = id;
+    botaoForm.setAttribute('name', 'atualizar')
+    botaoForm.innerHTML = "Atualizar"
+    let imagemProduto = document.getElementById("imagem-produto");
+    imagemProduto.src = url;
+
     selectCategoria.value = categoria;
     selectFabricante.value = fabricante;
     selectCondicao.value = condicao;
     selectOferta.value = oferta;
     selectEntrega.value = entrega;
+
     inputImagem.value = url;
     inputNome.value = nome;
-    inputDescricao.value = descricao
-    inputValor.value = valor
+    inputDescricao.value = descricao;
+    inputValor.value = valor;
 }
-
+botaoFechar.onclick = () => {
+    aside.style.left = "-20rem";
+    listaProdutos.style.marginLeft = "0%";
+}
 function adicionarCardProduto(id, url, categoria, fabricante, condicao, oferta, entrega, nome, descricao, valor) {
     cardHTML = `
-    <div>
-        <img src="${url}" class="produto-imagem" onclick="adicionarInformacoesFormAsideModificar('${id}','${url}', '${categoria}', '${fabricante}', '${condicao}', '${oferta}', '${entrega}', '${nome}', '${descricao}', '${valor}')">
+    <div class="card-produto">
+        <img src="${url}"  onclick="adicionarInformacoesFormAsideModificar('${id}','${url}', '${categoria}', '${fabricante}', '${condicao}', '${oferta}', '${entrega}', '${nome}', '${descricao}', '${valor}')">
     </div>
     `;
     listaProdutos.innerHTML += cardHTML;
@@ -90,27 +118,40 @@ function adicionarCardProduto(id, url, categoria, fabricante, condicao, oferta, 
 
 
 function adicionarCategorias(id, nome) {
-    filtroHTML = `<option name="categoria"value="${id}">${nome}</option>`
+    var option = document.createElement("option")
+    option.value = id;
+    option.textContent = nome;
 
-    selectCategoria.innerHTML += filtroHTML;
+    selectCategoria.append(option);
 }
 function adicionarFabricante(id, nome) {
-    filtroHTML = `<option name="fabricante"value="${id}">${nome}</option>`
+    var option = document.createElement("option")
+    option.value = id;
+    option.textContent = nome;
 
-    selectFabricante.innerHTML += filtroHTML;
+    selectFabricante.append(option);
 }
 function adicionarCondicao(id, nome) {
-    filtroHTML = `<option name="condicao"value="${id}">${nome}</option>`
+    var option = document.createElement("option")
+    option.value = id;
+    option.textContent = nome;
 
-    selectCondicao.innerHTML += filtroHTML;
+    selectCondicao.append(option);
 }
 function adicionarOferta(id, nome) {
-    filtroHTML = `<option name="oferta"value="${id}">${nome}</option>`
+    var option = document.createElement("option")
+    option.value = id;
+    option.textContent = nome;
 
-    selectOferta.innerHTML += filtroHTML;
+    selectOferta.append(option);
 }
 function adicionarEntrega(id, nome) {
-    filtroHTML = `<option name="entrega"value="${id}">${nome}</option>`
+    var option = document.createElement("option")
+    option.value = id;
+    option.textContent = nome;
 
-    selectEntrega.innerHTML += filtroHTML;
+    selectEntrega.append(option);
 }
+
+
+

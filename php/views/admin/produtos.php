@@ -10,17 +10,23 @@
 
 <body>
     <header>
-        <nav>
-            <button>Adicionar produto</button>
-        </nav>
-        <nav>
-            <button>Gerenciar filtros</button>
-        </nav>
+        <div>
+            <nav>
+                <button id="adicionar-produto">Adicionar produto</button>
+            </nav>
+            <nav>
+                <button>Gerenciar filtros</button>
+            </nav>
+        </div>
+        <a href="../pesquisa.php">Sair</a>
     </header>
     <aside id="informacao">
-        <img id="imagem-produto" src="" alt="Imagem do produto">
+        <button id="fechar">X</button>
 
         <form method="POST">
+            <div>
+                <img id="imagem-produto" src="" alt="Imagem do produto">
+            </div>
             <input id="imagem" name="imagem" type="text" placeholder="Url imagem">
             <select id="categoria" name="categoria" type="text" placeholder="Categoria">
                 <option selected>Categoria</option>
@@ -40,9 +46,8 @@
             <input id="nome" name="nome" type="text" placeholder="Nome">
             <input id="descricao" name="descricao" type="text" placeholder="Descricao">
             <input id="valor" name="valor" type="text" placeholder="Valor">
-            <button type="submit" name="atualizar" id="botao">Alterar</button>
+            <button type="submit" id="botao"></button>
         </form>
-
     </aside>
     <section id="lista-produtos">
 
@@ -101,45 +106,22 @@ if (isset($_POST['atualizar'])) {
         }
     }
 
-    // $banco->alterar_produto(
-    //     $id,
-    //     $url,
-    //     $categoria,
-    //     $valor,
-    //     $nome,
-    //     $oferta,
-    //     $entrega,
-    //     $condicao,
-    //     $fabricante,
-    //     $descricao
-    // );
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
-    echo "<br>";
-    echo $id;
-    echo "<br>";
-    echo $url;
-    echo "<br>";
-    echo $categoria;
-    echo "<br>";
-    echo $valor;
-    echo "<br>";
-    echo $nome;
-    echo "<br>";
-    echo $oferta;
-    echo "<br>";
-    echo $entrega;
-    echo "<br>";
-    echo $condicao;
-    echo "<br>";
-    echo $fabricante;
-    echo "<br>";
-    echo $descricao;
+    try {
+        $banco->alterar_produto(
+            $id,
+            $url,
+            $categoria,
+            $valor,
+            $nome,
+            $oferta,
+            $entrega,
+            $condicao,
+            $fabricante,
+            $descricao
+        );
+    } catch (PDOException $e) {
+        echo "Erro ao alterar o produto: " . $e->getMessage();
+    }
 }
 ?>
 
