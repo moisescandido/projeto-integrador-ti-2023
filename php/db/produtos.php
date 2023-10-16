@@ -163,13 +163,46 @@ class Produtos
         $stmt->execute();
 
         $sql = "UPDATE imagens_produtos SET url = :url WHERE id_produto = :id";
-
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':url', $url);
         $stmt->bindParam(':id', $id);
 
         $stmt->execute();
+    }
+    function criar_produto(
+        $url,
+        $categoria,
+        $valor,
+        $nome,
+        $oferta,
+        $entrega,
+        $condicao,
+        $fabricante,
+        $descricao
+    ) {
+        $pdo = new PDO($this->conexao, $this->usuario_banco, $this->senha_banco);
 
+        $sql = "INSERT INTO produtos(id_categoria, id_fabricante, id_condicao, id_oferta, id_entrega, nome, descricao, valor) VALUES(:categoria, :fabricante, :condicao, :oferta, :entrega, :nome, :descricao, :valor)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':categoria', $categoria, PDO::PARAM_INT);
+        $stmt->bindParam(':fabricante', $fabricante, PDO::PARAM_INT);
+        $stmt->bindParam(':condicao', $condicao, PDO::PARAM_INT);
+        $stmt->bindParam(':oferta', $oferta, PDO::PARAM_INT);
+        $stmt->bindParam(':entrega', $entrega, PDO::PARAM_INT);
+        $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+        $stmt->bindParam(':descricao', $descricao, PDO::PARAM_STR);
+        $stmt->bindParam(':valor', $valor, PDO::PARAM_STR);
+
+        $stmt->execute();
+
+        $id_produto = $pdo->lastInsertId();
+
+        $sql = "INSERT INTO imagens_produtos(id_produto, url) VALUES (:id, :url)";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':url', $url);
+        $stmt->bindParam(':id', $id_produto);
+
+        $stmt->execute();
     }
 }
 ?>

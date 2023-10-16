@@ -14,15 +14,11 @@
             <nav>
                 <button id="adicionar-produto">Adicionar produto</button>
             </nav>
-            <nav>
-                <button>Gerenciar filtros</button>
-            </nav>
         </div>
         <a href="../pesquisa.php">Sair</a>
     </header>
     <aside id="informacao">
         <button id="fechar">X</button>
-
         <form method="POST">
             <div>
                 <img id="imagem-produto" src="" alt="Imagem do produto">
@@ -50,7 +46,6 @@
         </form>
     </aside>
     <section id="lista-produtos">
-
     </section>
     <script src="https://code.jquery.com/jquery-3.7.1.js"
         integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
@@ -58,6 +53,37 @@
 </body>
 <?php
 
+if(isset($_POST['criar'])){
+    include("../../db/produtos.php");
+    $banco = new Produtos();
+
+    try {
+        $url = $_POST['imagem'];
+        $categoria = $_POST['categoria'];
+        $valor = $_POST['valor'];
+        $nome = $_POST['nome'];
+        $oferta = $_POST['oferta'];
+        $entrega = $_POST['entrega'];
+        $condicao = $_POST['condicao'];
+        $fabricante = $_POST['fabricante'];
+        $descricao = $_POST['descricao'];
+
+        $banco->criar_produto(
+            $url,
+            $categoria,
+            $valor,
+            $nome,
+            $oferta,
+            $entrega,
+            $condicao,
+            $fabricante,
+            $descricao
+        );
+    } catch (Exception $e) {
+        echo 'Ocorreu um erro: ' . $e->getMessage();
+    }
+    exit;
+}
 if (isset($_POST['atualizar'])) {
 
     $url = $_POST['imagem'];
@@ -122,6 +148,7 @@ if (isset($_POST['atualizar'])) {
     } catch (PDOException $e) {
         echo "Erro ao alterar o produto: " . $e->getMessage();
     }
+    exit;
 }
 ?>
 

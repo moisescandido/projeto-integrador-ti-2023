@@ -14,6 +14,8 @@ if (isset($_GET['produto'])) {
 }
 if (isset($_GET['filtros_pesquisa'])) {
     header('Content-Type: application/json');
+
+    try {
     $oferta = $banco->oferta();
     $entrega = $banco->entrega();
     $condicao = $banco->condicao();
@@ -33,7 +35,9 @@ if (isset($_GET['filtros_pesquisa'])) {
             "fabricante" => $fabricante,
             "categoria" => $categoria
         )
-    );
+    );} catch (Exception $e) {
+        echo json_encode(array("erro" => $e->getMessage()));
+    }
 }
 if (isset($_GET['todos_produtos'])) {
     header('Content-Type: application/json');

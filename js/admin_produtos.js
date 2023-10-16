@@ -68,15 +68,11 @@ window.onload = () => {
     botaoForm.value = null;
 }
 inputImagem.oninput = () => {
-    let imagemProduto = document.getElementById("imagem-produto");
-
-
+    let imagemProduto = document.getElementById("imagem-produto")
     imagemProduto.src = inputImagem.value;
     console.log(inputImagem.value)
 }
 botaoAdicionarProduto.onclick = () => {
-
-
     aside.style.left = "0";
     listaProdutos.style.marginLeft = "20%";
     botaoForm.setAttribute('name', 'criar')
@@ -108,6 +104,9 @@ botaoFechar.onclick = () => {
     listaProdutos.style.marginLeft = "0%";
 }
 function adicionarCardProduto(id, url, categoria, fabricante, condicao, oferta, entrega, nome, descricao, valor) {
+    if(url === undefined || url === null) {
+        url = "https://i0.wp.com/vssmn.org/wp-content/uploads/2018/12/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png?fit=860%2C681&ssl=1";
+    }
     cardHTML = `
     <div class="card-produto">
         <img src="${url}"  onclick="adicionarInformacoesFormAsideModificar('${id}','${url}', '${categoria}', '${fabricante}', '${condicao}', '${oferta}', '${entrega}', '${nome}', '${descricao}', '${valor}')">
