@@ -12,9 +12,44 @@ const inputValor = document.getElementById("valor")
 const botaoForm = document.getElementById("botao");
 const botaoAdicionarProduto = document.getElementById("adicionar-produto");
 const botaoFechar = document.getElementById("fechar");
+const botaoDeletar = document.getElementById("deletar");
 
 const aside = document.getElementById("informacao");
 window.onload = () => {
+    $.ajax({
+        url: "../../api/produtos.php",
+        method: "get",
+        data: {
+            filtros_pesquisa: ""
+        },
+        contentType: false,
+        success: function (resposta) {
+            console.log(resposta)
+            if (resposta !== null && resposta !== undefined) {
+                resposta.oferta.forEach(x => {
+                    adicionarOferta(x.id, x.nome);
+                });
+                resposta.entrega.forEach(x => {
+                    adicionarEntrega(x.id, x.nome);
+                });
+                resposta.condicao.forEach(x => {
+                    adicionarCondicao(x.id, x.nome);
+                });
+                resposta.fabricante.forEach(x => {
+                    adicionarFabricante(x.id, x.nome);
+                });
+                resposta.categoria.forEach(x => {
+                    adicionarCategorias(x.id, x.nome);
+                });
+                resposta.fabricante.forEach(x => {
+                    console.log(x)
+                })
+            }
+        },
+        error: function (erro) {
+            console.error("Erro: " + erro);
+        }
+    })
     $.ajax({
         url: "../../api/produtos.php",
         method: "get",
@@ -34,37 +69,6 @@ window.onload = () => {
             console.log("Erro: " + erro);
         }
     });
-
-    $.ajax({
-        url: "../../api/produtos.php",
-        method: "get",
-        data: {
-            filtros_pesquisa: ""
-        },
-        contentType: false,
-        success: function (resposta) {
-            if (resposta !== null && resposta !== undefined) {
-                resposta.oferta.forEach(x => {
-                    adicionarOferta(x.id, x.nome);
-                });
-                resposta.entrega.forEach(x => {
-                    adicionarEntrega(x.id, x.nome);
-                });
-                resposta.condicao.forEach(x => {
-                    adicionarCondicao(x.id, x.nome);
-                });
-                resposta.fabricante.forEach(x => {
-                    adicionarFabricante(x.id, x.nome);
-                });
-                resposta.categoria.forEach(x => {
-                    adicionarCategorias(x.id, x.nome);
-                });
-            }
-        },
-        error: function (erro) {
-            console.error("Erro: " + erro);
-        }
-    })
     botaoForm.value = null;
 }
 inputImagem.oninput = () => {
@@ -82,6 +86,9 @@ botaoAdicionarProduto.onclick = () => {
 function adicionarInformacoesFormAsideModificar(id, url, categoria, fabricante, condicao, oferta, entrega, nome, descricao, valor) {
     aside.style.left = "0";
     listaProdutos.style.marginLeft = "20%";
+
+    botaoDeletar.value = id;
+
     botaoForm.value = id;
     botaoForm.setAttribute('name', 'atualizar')
     botaoForm.innerHTML = "Atualizar"
@@ -104,7 +111,7 @@ botaoFechar.onclick = () => {
     listaProdutos.style.marginLeft = "0%";
 }
 function adicionarCardProduto(id, url, categoria, fabricante, condicao, oferta, entrega, nome, descricao, valor) {
-    if(url === undefined || url === null) {
+    if (url === undefined || url === null) {
         url = "https://i0.wp.com/vssmn.org/wp-content/uploads/2018/12/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png?fit=860%2C681&ssl=1";
     }
     cardHTML = `

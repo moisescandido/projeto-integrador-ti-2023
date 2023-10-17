@@ -1,5 +1,5 @@
 <?php
-$usuario_banco = "moises";
-$senha_banco = "root";
+$usuario_banco = "root";
+$senha_banco = "";
 $conexao = "mysql:host=localhost;dbname=projeto";
 ?>

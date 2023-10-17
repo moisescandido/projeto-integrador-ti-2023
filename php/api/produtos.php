@@ -16,26 +16,28 @@ if (isset($_GET['filtros_pesquisa'])) {
     header('Content-Type: application/json');
 
     try {
-    $oferta = $banco->oferta();
-    $entrega = $banco->entrega();
-    $condicao = $banco->condicao();
-    $categoria = $banco->categoria();
-    $fabricante;
+        $oferta = $banco->oferta();
+        $entrega = $banco->entrega();
+        $condicao = $banco->condicao();
+        $categoria = $banco->categoria();
+        $fabricante;
 
-    if ($_GET['filtros_pesquisa'] != "") {
-        $fabricante = $banco->fabricantes_todos();
-    } else {
-        $fabricante = $banco->fabricantes_produto($_GET['filtros_pesquisa']);
-    }
-    echo json_encode(
-        array(
-            "oferta" => $oferta,
-            "entrega" => $entrega,
-            "condicao" => $condicao,
-            "fabricante" => $fabricante,
-            "categoria" => $categoria
-        )
-    );} catch (Exception $e) {
+
+        if (empty($_GET['filtros_pesquisa'])) {
+            $fabricante = $banco->fabricantes_todos();
+        } else {
+            $fabricante = $banco->fabricantes_produto($_GET['filtros_pesquisa']);
+        }
+        echo json_encode(
+            array(
+                "oferta" => $oferta,
+                "entrega" => $entrega,
+                "condicao" => $condicao,
+                "fabricante" => $fabricante,
+                "categoria" => $categoria
+            )
+        );
+    } catch (Exception $e) {
         echo json_encode(array("erro" => $e->getMessage()));
     }
 }

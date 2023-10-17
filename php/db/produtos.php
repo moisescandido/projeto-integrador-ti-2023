@@ -12,20 +12,38 @@ class Produtos
         $this->senha_banco = $senha_banco;
         $this->conexao = $conexao;
     }
+    function informacoes_produto(string $id)
+    {
+        $pdo = new PDO($this->conexao, $this->usuario_banco, $this->senha_banco);
+
+        $query = $pdo->prepare("SELECT pr.id, pr.descricao, cat.nome as categoria, imp.url, pr.valor, pr.nome, top.nome as oferta, tep.nome as entrega, con.condicao condicao, fa.nome as fabricante 
+        FROM produtos pr 
+        INNER JOIN condicoes_produtos con 
+        ON pr.id_condicao = con.id
+        INNER JOIN fabricante fa ON pr.id_fabricante = fa.id
+        INNER JOIN categorias_produtos cat ON pr.id_categoria = cat.id
+        INNER JOIN tipo_entrega_produto tep ON pr.id_entrega = tep.id
+        INNER JOIN tipo_oferta_produto top ON pr.id_entrega = top.id
+        INNER JOIN imagens_produtos imp ON pr.id = imp.id_produto and pr.id = :id");
+        $query->bindParam(":id", $id, PDO::PARAM_INT);
+
+        $query->execute();
+
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
     function pesquisa_nome(string $param)
     {
         $pdo = new PDO($this->conexao, $this->usuario_banco, $this->senha_banco);
 
-        $query = $pdo->prepare("SELECT imp.url, pr.valor, pr.nome, top.id as oferta, tep.id as entrega, con.id condicao, fa.id as fabricante 
+        $query = $pdo->prepare("SELECT pr.id,imp.url, pr.valor, pr.nome, top.id as oferta, tep.id as entrega, con.id condicao, fa.id as fabricante 
         FROM produtos pr 
         INNER JOIN condicoes_produtos con 
         ON pr.id_condicao = con.id
         INNER JOIN fabricante fa ON pr.id_fabricante = fa.id
         INNER JOIN tipo_entrega_produto tep ON pr.id_entrega = tep.id
         INNER JOIN tipo_oferta_produto top ON pr.id_entrega = top.id
-        INNER JOIN imagens_produtos imp ON pr.id = imp.id_produto and pr.nome LIKE CONCAT('%', :nome, '%') OR pr.id = :id GROUP BY pr.id");
+        INNER JOIN imagens_produtos imp ON pr.id = imp.id_produto and pr.nome LIKE CONCAT('%', :nome, '%')");
         $query->bindParam(":nome", $param, PDO::PARAM_STR);
-        $query->bindParam(":id", $param, PDO::PARAM_INT);
 
         $query->execute();
 
@@ -105,6 +123,19 @@ class Produtos
         $query->execute();
 
         return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+    function deletar_produto(string $id_produto)
+    {
+        $pdo = new PDO($this->conexao, $this->usuario_banco, $this->senha_banco);
+
+        $query = $pdo->prepare("DELETE FROM imagens_produtos WHERE id_produto = :id");
+        $query->bindParam(":id", $id_produto, PDO::PARAM_STR);
+        $query->execute();
+
+        $query = $pdo->prepare("DELETE FROM PRODUTOS WHERE id = :id");
+        $query->bindParam(":id", $id_produto, PDO::PARAM_STR);
+
+        $query->execute();
     }
     function pesquisa_todos()
     {

@@ -19,8 +19,6 @@ function buscar_cep(cep) {
             rua.value = data.logradouro;
             bairro.value = data.bairro;
             cidade.value = data.localidade;
-
-
         })
         .catch(error => {
             console.error(error);

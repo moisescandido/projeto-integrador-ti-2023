@@ -25,7 +25,7 @@ class Usuario
     ) {
         $pdo = new PDO($this->conexao, $this->usuario_banco, $this->senha_banco);
 
-        $id_funcao = 1;
+        $id_funcao = 2;
         $queryUsuario = $pdo->prepare("INSERT INTO usuarios (id_funcao, nome, email, senha, telefone, criado, atualizado) VALUES (:id_funcao, :nome, :email, :senha, :telefone, :criado, :atualizado)");
         $queryUsuario->bindParam(":id_funcao", $id_funcao, PDO::PARAM_INT);
         $queryUsuario->bindParam(":nome", $nome, PDO::PARAM_STR);
@@ -43,7 +43,7 @@ class Usuario
 
         $usuarioId = $pdo->lastInsertId();
 
-        $queryEndereco = $pdo->prepare("INSERT INTO endereco_usuario (rua, numero, bairro, cep, cidade, id_usuario) VALUES (:rua, :numero, :bairro, :cep, :cidade, :id_usuario)");
+        $queryEndereco = $pdo->prepare("INSERT INTO endereco_usuarios (rua, numero, bairro, cep, cidade, id_usuario) VALUES (:rua, :numero, :bairro, :cep, :cidade, :id_usuario)");
         $queryEndereco->bindParam(":rua", $rua, PDO::PARAM_STR);
         $queryEndereco->bindParam(":numero", $numero, PDO::PARAM_STR);
         $queryEndereco->bindParam(":bairro", $bairro, PDO::PARAM_STR);

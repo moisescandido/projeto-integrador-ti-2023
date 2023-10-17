@@ -17,7 +17,7 @@
         <?php
         include("../componentes/header.php");
         $nome_produto;
-        
+
         if (isset($_GET['produto'])) {
             $nome_produto = $_GET['produto'];
         }
@@ -61,7 +61,7 @@
                                 aria-describedby="basic-addon1">
                         </div>
                     </div>
-                    <button type="button" style="
+                    <button id="filtrar" type="button" style="
                                     height: 2.2rem;
                                     width: 5rem;
                                     background-color: #332F99;

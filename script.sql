@@ -1,5 +1,6 @@
 create database projeto;
 use projeto;
+
 create table usuarios(
     id int not null primary key auto_increment,
     id_funcao int not null,
@@ -42,18 +43,6 @@ create table condicoes_produtos (
     condicao varchar(50) not null unique
 );
 
-create table estoque(
-    id int not null primary key auto_increment,
-    id_produto int not null,
-    quantidade int not null
-);
-
-create table vantagens_produtos(
-    id int not null primary key auto_increment,
-    id_produto int not null,
-    vantagem varchar(35)
-);
-
 create table imagens_produtos (
     id int not null primary key auto_increment,
     id_produto int not null,
@@ -81,8 +70,44 @@ create table tipo_entrega_produto(
     nome varchar(50) not null unique
 );
 
-
 create table tipo_oferta_produto(
     id int not null primary key auto_increment,
     nome varchar(50) not null unique
 );
+
+INSERT INTO funcoes_usuarios (funcao) VALUES
+    ('Administrador'),
+    ('Cliente');
+
+INSERT INTO fabricante (nome) VALUES
+    ('Sony'),
+    ('Samsung'),
+    ('Apple'),
+    ('Nike'),
+    ('Adidas'),
+    ('LG'),
+    ('Coca-Cola'),
+    ('Pepsi'),
+    ('Ford'),
+    ('Toyota');
+
+INSERT INTO categorias_produtos (nome) VALUES
+    ('Eletrônicos'),
+    ('Roupas'),
+    ('Alimentos'),
+    ('Móveis');
+
+INSERT INTO condicoes_produtos (condicao) VALUES
+    ('Novo'),
+    ('Usado'),
+    ('Recondicionado');
+
+INSERT INTO tipo_oferta_produto (nome) VALUES
+    ('Desconto'),
+    ('Liquidação'),
+    ('Oferta do dia');
+
+INSERT INTO tipo_entrega_produto (nome) VALUES
+    ('Entrega rápida'),
+    ('Entrega padrão'),
+    ('Retirada na loja');

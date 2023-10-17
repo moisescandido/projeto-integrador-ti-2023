@@ -8,6 +8,14 @@
     <title>Document</title>
 </head>
 
+
+<?php
+session_start();
+if ($_SESSION['id_funcao'] !== 1) {
+    header("Location: ../home.php");
+}
+?>
+
 <body>
     <header>
         <div>
@@ -15,7 +23,7 @@
                 <button id="adicionar-produto">Adicionar produto</button>
             </nav>
         </div>
-        <a href="../pesquisa.php">Sair</a>
+        <a href="../home.php">Sair</a>
     </header>
     <aside id="informacao">
         <button id="fechar">X</button>
@@ -43,6 +51,7 @@
             <input id="descricao" name="descricao" type="text" placeholder="Descricao">
             <input id="valor" name="valor" type="text" placeholder="Valor">
             <button type="submit" id="botao"></button>
+            <button type="submit" id="deletar" name="deletar">Deletar</button>
         </form>
     </aside>
     <section id="lista-produtos">
@@ -53,7 +62,15 @@
 </body>
 <?php
 
-if(isset($_POST['criar'])){
+if (isset($_POST['deletar'])) {
+    include("../../db/produtos.php");
+    $banco = new Produtos();
+
+    if (!empty($_POST['deletar'])) {
+        $banco->deletar_produto($_POST['deletar']);
+    }
+}
+if (isset($_POST['criar'])) {
     include("../../db/produtos.php");
     $banco = new Produtos();
 
