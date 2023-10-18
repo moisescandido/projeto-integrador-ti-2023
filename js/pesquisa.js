@@ -1,10 +1,23 @@
 var listaProdutos = document.getElementById("lista-produtos");
-var listaOriginalProdutos, listaModificadaProdutos;
+var listaOriginalProdutos
+var listaModificadaProdutos = []
 
 const botaoFiltrar = document.getElementById("filtrar");
+const botaoLimpar = document.getElementById("limpar");
 
 botaoFiltrar.onclick = () => {
+    listaModificadaProdutos = []
+    listaProdutos.innerHTML = "";
     alterarLista();
+}
+botaoLimpar.onclick = () => {
+    listaModificadaProdutos = []
+    listaProdutos.innerHTML = "";
+    limparFiltros();
+
+    listaOriginalProdutos.forEach(x => {
+        criarCardProduto(x.id, x.url, x.valor, x.nome)
+    })
 }
 function carregar(produto) {
     $.ajax({
@@ -66,29 +79,75 @@ function alterarLista() {
         condicao: [],
         fabricante: []
     }
-    ofertaInput.forEach = (x) => {
+    for (x of ofertaInput) {
         if (x.checked) {
-            console.log(x)
             valoresSelecionados.oferta.push(x.value);
         }
     }
-    entregaInput.forEach = (x) => {
+    for (x of entregaInput) {
         if (x.checked) {
             valoresSelecionados.entrega.push(x.value);
         }
     }
-    condicaoInput.forEach = (x) => {
+    for (x of condicaoInput) {
         if (x.checked) {
             valoresSelecionados.condicao.push(x.value);
         }
     }
-    fabricanteInput.forEach = (x) => {
+    for (x of fabricanteInput) {
         if (x.checked) {
             valoresSelecionados.fabricante.push(x.value);
         }
     }
 
-    console.log(valoresSelecionados);
+    for (x of valoresSelecionados.oferta) {
+        for (i in listaOriginalProdutos) {
+            if (listaOriginalProdutos[i].oferta == x) {
+                listaModificadaProdutos.push(listaOriginalProdutos[i])
+            }
+        }
+    }
+
+    listaModificadaProdutos = listaOriginalProdutos.filter(x => {
+        return (
+            !valoresSelecionados.oferta.includes(x.oferta.toString()) &&
+            !valoresSelecionados.entrega.includes(x.entrega.toString()) &&
+            !valoresSelecionados.condicao.includes(x.condicao.toString()) &&
+            !valoresSelecionados.fabricante.includes(x.fabricante.toString())
+        );
+    });
+
+    console.log(listaModificadaProdutos);
+    listaModificadaProdutos.forEach(x => {
+        criarCardProduto(x.id, x.url, x.valor, x.nome)
+    })
+}
+function limparFiltros() {
+    const ofertaInput = document.getElementsByName("oferta");
+    const entregaInput = document.getElementsByName("entrega");
+    const condicaoInput = document.getElementsByName("condicao");
+    const fabricanteInput = document.getElementsByName("fabricante");
+
+    for (x of ofertaInput) {
+        if (x.checked) {
+            x.checked = false
+        }
+    }
+    for (x of entregaInput) {
+        if (x.checked) {
+            x.checked = false
+        }
+    }
+    for (x of condicaoInput) {
+        if (x.checked) {
+            x.checked = false
+        }
+    }
+    for (x of fabricanteInput) {
+        if (x.checked) {
+            x.checked = false
+        }
+    }
 }
 function criarCardProduto(id, imagem, preco, nome,) {
     const card = ` <section id="lista-produtos" class="d-flex flex-wrap g-3" style="gap: 1rem;">

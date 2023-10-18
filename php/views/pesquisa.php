@@ -69,6 +69,14 @@
                                     color: white;
                                     border-radius: 4px;
                                     ">Filtrar</button>
+                    <button id="limpar" type="button" style="
+                                    height: 2.2rem;
+                                    width: 5rem;
+                                    background-color: #332F99;
+                                    border: 1px solid #332F99;
+                                    color: white;
+                                    border-radius: 4px;
+                                    ">Limpar</button>
                 </aside>
                 <div id="lista-produtos" class="col-md-9 d-flex flex-wrap gap-1">
                 </div>
