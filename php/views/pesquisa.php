@@ -72,8 +72,8 @@
                     <button id="limpar" type="button" style="
                                     height: 2.2rem;
                                     width: 5rem;
-                                    background-color: #332F99;
-                                    border: 1px solid #332F99;
+                                    background-color: #EB150E;
+                                    border: 1px solid #EB150E;
                                     color: white;
                                     border-radius: 4px;
                                     ">Limpar</button>
